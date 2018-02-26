@@ -1,0 +1,10 @@
+{
+    "storage-driver": "devicemapper",
+    "storage-opts": [
+    "dm.thinpooldev=/dev/mapper/docker-thinpool",
+    "dm.use_deferred_removal=true",
+    "dm.use_deferred_deletion=true"
+    ],
+    "graph": "{{ dockerd_option_graph }}",
+    "insecure-registries": ["172.30.33.31:5000","172.30.33.88:5000","172.29.151.41:5000","harbor.quark.com"]
+}

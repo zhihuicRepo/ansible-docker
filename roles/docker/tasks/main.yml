@@ -1,0 +1,49 @@
+---
+- name: docker group add
+  group:
+    name: docker
+    state: present
+
+- name: User into Docker group
+  user:
+    name: itadmin
+    group: docker
+    state: present
+
+- name: User into Docker group
+  user:
+    name: dockeradmin
+    group: docker
+    state: present
+
+- name: ensure config directory
+  file:
+    path: "{{ docker_config_dir }}"
+    state: directory
+
+- name: ensure required packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+- name: install docker
+  yum:
+    name: "docker-{{ docker_version }}"
+    state: present
+  notify: restart docker
+
+- name: copy dockerd daemon.json
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+  notify: restart docker
+
+- name: copy docker file
+  template:
+    src: docker
+    dest: /etc/sysconfig/docker
+  notify: restart docker

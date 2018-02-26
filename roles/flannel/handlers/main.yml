@@ -1,0 +1,6 @@
+---
+- name: restart flanneld
+  systemd:
+    name: flanneld
+    state: restarted
+    enabled: true

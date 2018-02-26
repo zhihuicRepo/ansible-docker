@@ -1,0 +1,5 @@
+flanneld_version: 0.7.1-2.el7
+flanneld_config_dir: /etc/sysconfig
+flanneld_bound_interface: "eth0"
+flanneld_etcd_prefix: "/quark.com/network"
+flanneld_etcd_endpoints: "http://10.19.64.64:2379"
